@@ -6,7 +6,7 @@ export class CreateProductDTO {
   codigo_produto: string;
 
   @IsNotEmpty({ message: "A descrição do produto é obrigatória" })
-  @IsString()
+  @IsString({ message: "A descrição do produto deve ser uma string" })
   descricao_produto: string;
 
   @IsOptional()

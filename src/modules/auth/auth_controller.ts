@@ -80,7 +80,7 @@ export class AuthController {
         }
     
         const token = authHeader.replace('Bearer ', '');
-    
+         //de forma simples a função jwt.verify verifica se o token é valido e se é valido ele retorna o id e o email do usuario
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token inválido" });
@@ -89,6 +89,7 @@ export class AuthController {
             req.user = decoded; 
             next();
         });
+   
     }
     
 

@@ -12,7 +12,7 @@ export class ProductRepository {
     return prisma.produto.findMany();
   }
 
-  async updateProduct(id: string, data: Product) {
+  async updateProduct(id: string, data: any) {
     return prisma.produto.update({ where: { id }, data });
   }
 
@@ -23,10 +23,8 @@ export class ProductRepository {
   async getProductByCodigo(codigo_produto: string) {
     return prisma.produto.findUnique({ where: { codigo_produto } });
   }
-}
-interface Product {
-  codigo_produto: string;
-  descricao_produto: string;
-  foto_produto?: string;
-}
 
+  async getProductById(id: string) {
+    return prisma.produto.findUnique({ where: { id } });
+  }
+}

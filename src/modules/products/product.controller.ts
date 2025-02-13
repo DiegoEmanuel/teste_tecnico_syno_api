@@ -8,30 +8,30 @@ import { plainToClass } from "class-transformer";
 const productService = new ProductService();
 
 export class ProductController {
-  async createProduct(req: Request, res: Response) {
-    const productDto = plainToClass(CreateProductDTO, req.body);
-    const errors = await validate(productDto);
-    if(errors.length > 0){
-      return res.status(400).json({ errors });
-    }
-    
-
-      ///verificar se ja tem produto com o mesmo codigo
-      const productExists = await productService.getProductByCodigo(productDto.codigo_produto);
-      if(productExists){
-       //retornar no mesmo modelo de erro que os dtos
-       return res.status(400).json({ errors: [{ property: "codigo_produto", constraints: { isUnique: "Produto com o mesmo código já existe" } }] });
-      }
-
-    const { codigo_produto, descricao_produto, foto_produto, } = productDto;
-    try {
-      const product = await productService.createProduct(codigo_produto, descricao_produto, foto_produto);
-      res.status(201).json(product);
-    } catch (error) {
-      console.error("Erro ao criar produto:", error);
-      res.status(400).json({ error: "Erro ao criar produto" });
-    }
+ // Controller
+async createProduct(req: Request, res: Response) {
+  const productDto = plainToClass(CreateProductDTO, req.body);
+  const errors = await validate(productDto);
+  if (errors.length > 0) {
+    return res.status(400).json({ errors });
   }
+
+  try {
+    const product = await productService.createProduct(productDto);
+    res.status(201).json(product);
+  } catch (error: any) {
+    // Se o Service lançar um erro de "produto duplicado", tratar aqui
+    if (error.message === "PRODUCT_DUPLICATE") {
+      return res.status(400).json({
+        errors: [{
+          property: "codigo_produto",
+          constraints: { isUnique: "Produto com o mesmo código já existe" }
+        }]
+      });
+    }
+    res.status(400).json({ error: "Erro ao criar produto" });
+  }
+}
 
   async getAllProducts(req: Request, res: Response) {
     const products = await productService.getAllProducts();
@@ -44,8 +44,9 @@ export class ProductController {
     try {
       const product = await productService.updateProduct(id, data);
       res.json(product);
-    } catch {
-      res.status(400).json({ error: "Produto não encontrado" });
+    } catch (error) {
+      console.error("Erro ao atualizar produto:", error);
+      res.status(400).json({ error: "Erro ao atualizar produto " + error });
     }
   }
 
@@ -57,5 +58,11 @@ export class ProductController {
     } catch {
       res.status(400).json({ error: "Produto não encontrado" });
     }
+  }
+
+  async getProductById(req: Request, res: Response) {
+    const { id } = req.params;
+    const product = await productService.getProductById(id);
+    res.json(product);
   }
 }

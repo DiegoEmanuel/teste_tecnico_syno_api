@@ -6,8 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-//colocar nome produtos
-//colocar nome users
+
 model Produto {
   id              String  @id @default(uuid())
   codigo_produto  String  @unique

@@ -1,17 +1,30 @@
+import { CreateProductDTO } from "./product.dto";
 import { ProductRepository } from "./product.repository";
 
 export class ProductService {
   private productRepository = new ProductRepository();
 
-  async createProduct(codigo_produto: string, descricao_produto: string, foto_produto?: string) {
-    return this.productRepository.createProduct(codigo_produto, descricao_produto, foto_produto);
+  // Service
+async createProduct(productDto: CreateProductDTO) {
+  // verificar se já tem produto com o mesmo codigo
+  const productExists = await this.productRepository.getProductByCodigo(productDto.codigo_produto);
+  if (productExists) {
+    // lança exceção específica
+    throw new Error("PRODUCT_DUPLICATE");
   }
+  return this.productRepository.createProduct(
+    productDto.codigo_produto,
+    productDto.descricao_produto,
+    productDto.foto_produto
+  );
+}
+
 
   async getAllProducts() {
     return this.productRepository.getAllProducts();
   }
 
-  async updateProduct(id: string, data: Product) {
+  async updateProduct(id: string, data: any) {
     return this.productRepository.updateProduct(id, data);
   }
 
@@ -22,12 +35,10 @@ export class ProductService {
   async getProductByCodigo(codigo_produto: string) {
     return this.productRepository.getProductByCodigo(codigo_produto);
   }
-}
 
-interface Product {
-  codigo_produto: string;
-  descricao_produto: string;
-  foto_produto?: string;
+  async getProductById(id: string) {
+    return this.productRepository.getProductById(id);
+  }
 }
 
 

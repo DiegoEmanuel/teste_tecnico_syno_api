@@ -13,7 +13,7 @@ Content-Type: application/json
 
 
 ###PUT users
-PUT http://localhost:3000/users/1
+PUT http://localhost:3000/users/beab14b1-ed81-4e5e-92b2-eb5a249bc055
 Content-Type: application/json
 
 {
