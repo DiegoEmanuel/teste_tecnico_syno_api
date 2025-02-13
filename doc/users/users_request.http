@@ -1,0 +1,32 @@
+###GET users
+GET http://localhost:3000/users
+
+###POST users
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "email": "diegoabox@gmail.com",
+    "password": "123456",
+    "name": "Diegão Emanuel"
+}
+
+
+###PUT users
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "name": "Diego Emanuel"
+}
+
+###DELETE users
+DELETE http://localhost:3000/users/1
+
+###DELETE all users
+DELETE http://localhost:3000/users
+
+###Delete all users
+DELETE http://localhost:3000/users/
+
+
