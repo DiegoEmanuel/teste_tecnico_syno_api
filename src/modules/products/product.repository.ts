@@ -9,7 +9,11 @@ export class ProductRepository {
   }
 
   async getAllProducts() {
-    return prisma.produto.findMany();
+    return prisma.produto.findMany({
+      orderBy: {
+        status: 'desc'
+      }
+    });
   }
 
   async updateProduct(id: string, data: any) {

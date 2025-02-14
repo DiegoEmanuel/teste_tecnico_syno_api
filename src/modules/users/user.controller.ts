@@ -63,6 +63,4 @@ export class UserController {
     const users = await userService.deleteAllUsers();
     res.json(users);
   }
-
-
 }

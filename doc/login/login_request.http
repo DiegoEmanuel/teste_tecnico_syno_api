@@ -1,5 +1,5 @@
 ###login
-POST http://localhost:3000/users/login
+POST https://teste-tecnico-syno-api.onrender.com/users/login
 Content-Type: application/json
 
 {
@@ -10,9 +10,10 @@ Content-Type: application/json
 
 ###verify token vazio
 GET http://localhost:3000/users/verify-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk0Nzc1NzksImV4cCI6MTczOTQ4MTE3OX0.YKn6UOlG74enr-45YmXyUz-EtdfZlCPKhvT8YECyKTw
 ###verify token
-GET http://localhost:3000/users/verify-token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk0NTAzNDMsImV4cCI6MTczOTQ1Mzk0M30.Lwbnn71_wyGc0NJHy9wsz-3KrjKT9fXYNcnFyDVEAbE
+GET https://teste-tecnico-syno-api.onrender.com/users/verify-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk0Nzc1NzksImV4cCI6MTczOTQ4MTE3OX0.YKn6UOlG74enr-45YmXyUz-EtdfZlCPKhvT8YECyKTw
 
 
 ###delete all users sem token

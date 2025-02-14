@@ -53,6 +53,7 @@ export class AuthController {
                     email: user.email 
                 }, 
                 secret,
+                //token expirando em 1h
                 { expiresIn: "1h" }
             );
 

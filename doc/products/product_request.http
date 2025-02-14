@@ -1,6 +1,6 @@
 ###GET
 GET http://localhost:3000/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk0NzQyMTUsImV4cCI6MTczOTQ3NzgxNX0.lQQtWdrDp2_jNoWrVfNpoYeoSpqbOTm3CZfikhPriu8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk1NDIzNTYsImV4cCI6MTczOTU0NTk1Nn0.YX_MI-utfgQk7cn5m4_fvsexCZecbMzsuUnfs4fBcIs
 
 ###POST
 POST http://localhost:3000/products
@@ -14,12 +14,15 @@ Content-Type: application/json
 }
 
 ###PUT
-PUT http://localhost:3000/products/283013cb-6213-4457-ba7e-502a09df233e
+PUT http://localhost:3000/products/63479a5c-4ef4-4f42-af6b-2098338b31c9
 Content-Type: application/json
 
-{   
-    "status": false
-}
+ {
+    "codigo_produto": "3",
+    "descricao_produto": "Produto de teste",
+    "status": true,
+    "foto_produto": "https://avatars.githubusercontent.com/u/43099313?v=4"
+  }
 ###DELETE
 DELETE http://localhost:3000/products/d6cc7d26-7f2b-438b-a13e-a52a3f037586
 
