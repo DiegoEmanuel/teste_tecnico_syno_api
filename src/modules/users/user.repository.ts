@@ -25,4 +25,8 @@ export class UserRepository {
   async deleteAllUsers() {
     return prisma.users.deleteMany();
   }
+
+  async findUserById(id: string) {
+    return prisma.users.findUnique({ where: { id } });
+  }
 }

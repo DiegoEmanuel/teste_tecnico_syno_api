@@ -20,6 +20,8 @@ export class UserService {
   }
 
   async deleteUser(id: string) {
+    const user = await this.userRepository.findUserById(id);
+    if (!user) throw new Error("Usuário não encontrado");
     return this.userRepository.deleteUser(id);
   }
 
@@ -29,6 +31,12 @@ export class UserService {
 
   async findUserByEmail(email: string) {
     return this.userRepository.findUserByEmail(email);
+  }
+
+  async findUserById(id: string) {
+    const user = await this.userRepository.findUserById(id);
+    if (!user) throw new Error("Usuário não encontrado");
+    return user;
   }
 }
 

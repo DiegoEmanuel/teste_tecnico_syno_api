@@ -1,15 +1,28 @@
 import { Router } from "express";
 import { ProductController } from "./product.controller";
 import { AuthController } from "../auth/auth_controller";
+import { upload } from "../../config/multerconfig";
 
 const router = Router();
 const productController = new ProductController();
 const authController = new AuthController();
 
-router.post("/", authController.verifyToken.bind(authController), productController.createProduct.bind(productController));
-router.get("/", authController.verifyToken.bind(authController), productController.getAllProducts.bind(productController));
-router.put("/:id", productController.updateProduct.bind(productController));
-router.delete("/:id", productController.deleteProduct.bind(productController));
+router.post("/",
+    authController.verifyToken.bind(authController),
+    upload.single("foto_produto"),
+    productController.createProduct.bind(productController)
+);
+
+router.get("/", productController.getAllProducts.bind(productController));
+
+router.put("/:id", authController.verifyToken.bind(authController), upload.single("foto_produto"), productController.updateProduct.bind(productController));
+
+router.delete("/:id", authController.verifyToken.bind(authController), productController.deleteProduct.bind(productController));
+
 router.get("/:id", productController.getProductById.bind(productController));
 
+router.delete("/", authController.verifyToken.bind(authController), productController.deleteAllProducts.bind(productController));
+
 export default router;
+
+

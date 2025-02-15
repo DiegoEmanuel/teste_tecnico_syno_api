@@ -5,17 +5,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwN
 ###POST
 POST http://localhost:3000/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk2Mjg2NDEsImV4cCI6MTczOTYzMjI0MX0.57GozFrbNjWWWzbLHKvJ8uOavX74RIyM39BA6nFSBYs
 
 {
     "codigo_produto": "09",
     "descricao_produto": "Produto de teste",
-    "foto_produto": "https://avatars.githubusercontent.com/u/43099313?v=4",
     "status": true
 }
 
 ###PUT
-PUT http://localhost:3000/products/63479a5c-4ef4-4f42-af6b-2098338b31c9
+PUT http://localhost:3000/products/074447c5-4096-44e3-98fe-245724f28080
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk2Mjg2NDEsImV4cCI6MTczOTYzMjI0MX0.57GozFrbNjWWWzbLHKvJ8uOavX74RIyM39BA6nFSBYs
 
  {
     "codigo_produto": "3",

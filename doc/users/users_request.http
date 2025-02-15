@@ -17,11 +17,11 @@ PUT http://localhost:3000/users/beab14b1-ed81-4e5e-92b2-eb5a249bc055
 Content-Type: application/json
 
 {
-    "name": "Diego Emanuel"
+    "name": "Diego Emanuel FC"
 }
 
 ###DELETE users
-DELETE http://localhost:3000/users/1
+DELETE http://localhost:3000/users/70b0684b-977b-4232-a08c-113c0e6b6dd
 
 ###DELETE all users
 DELETE http://localhost:3000/users

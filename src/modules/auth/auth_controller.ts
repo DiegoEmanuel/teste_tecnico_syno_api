@@ -6,9 +6,9 @@ import { config } from "dotenv";
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { LoginDto } from './dtos/login.dto';
-
-const secret = process.env.JWT_SECRET || 'diegofalcao';
 config();
+
+const secret = process.env.JWT_SECRET || 'diegofalcao'; //ideial não ser hardcoded
 
 
 export interface AuthenticatedRequest extends Request {
@@ -28,9 +28,9 @@ export class AuthController {
                     property: error.property,
                     constraints: error.constraints
                 }));
-                return res.status(400).json({ 
+                return res.status(400).json({
                     message: 'Erro de validação',
-                    errors: validationErrors 
+                    errors: validationErrors
                 });
             }
 
@@ -48,16 +48,16 @@ export class AuthController {
             }
 
             const token = jwt.sign(
-                { 
+                {
                     userId: user.id,
-                    email: user.email 
-                }, 
+                    email: user.email
+                },
                 secret,
                 //token expirando em 1h
                 { expiresIn: "1h" }
             );
 
-            return res.json({ 
+            return res.json({
                 niceJob: true,
                 token,
                 user: {
@@ -71,28 +71,28 @@ export class AuthController {
             return res.status(500).json({ message: "Erro ao fazer login" });
         }
     }
-    
+
 
     async verifyToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
         const authHeader = req.headers.authorization;
-    
+
         if (!authHeader) {
             return res.status(401).json({ message: "Token não fornecido" });
         }
-    
+
         const token = authHeader.replace('Bearer ', '');
-         //de forma simples a função jwt.verify verifica se o token é valido e se é valido ele retorna o id e o email do usuario
+        //de forma simples a função jwt.verify verifica se o token é valido e se é valido ele retorna o id e o email do usuario
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token inválido" });
             }
-    
-            req.user = decoded; 
+
+            req.user = decoded;
             next();
         });
-   
+
     }
-    
+
 
 }
 

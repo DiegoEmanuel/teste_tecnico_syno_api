@@ -31,4 +31,8 @@ export class ProductRepository {
   async getProductById(id: string) {
     return prisma.produto.findUnique({ where: { id } });
   }
+
+  async deleteAllProducts() {
+    return prisma.produto.deleteMany();
+  }
 }
