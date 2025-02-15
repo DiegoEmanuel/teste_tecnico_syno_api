@@ -5,9 +5,9 @@ import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 import { buildImageUrl } from "../../helper/url_helper";
 
+
 export class ProductController {
   constructor(private productService: ProductService = new ProductService()) { }
-
 
   async createProduct(req: Request, res: Response) {
     try {
@@ -36,7 +36,6 @@ export class ProductController {
       return res.status(400).json({ error: error.message || "Erro ao criar produto" });
     }
   }
-
 
   async updateProduct(req: Request, res: Response) {
     try {
@@ -76,7 +75,6 @@ export class ProductController {
     }
   }
 
-
   async getAllProducts(req: Request, res: Response) {
     try {
       const products = await this.productService.getAllProducts();
@@ -97,7 +95,7 @@ export class ProductController {
     try {
       const { id } = req.params;
       await this.productService.deleteProduct(id);
-      return res.json({ message: "Produto deletado" });
+      return res.sendStatus(204);
     } catch (error: any) {
       console.error("Erro ao deletar produto:", error);
       return res.status(400).json({ error: error.message || "Produto não encontrado" });
@@ -107,7 +105,7 @@ export class ProductController {
   async deleteAllProducts(req: Request, res: Response) {
     try {
       await this.productService.deleteAllProducts();
-      return res.json({ message: "Todos os produtos foram deletados" });
+      return res.sendStatus(204);
     } catch (error: any) {
       console.error("Erro ao deletar todos os produtos:", error);
       return res.status(400).json({ error: error.message || "Erro ao deletar todos os produtos" });
