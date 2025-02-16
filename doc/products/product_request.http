@@ -25,7 +25,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiY
     "foto_produto": "https://avatars.githubusercontent.com/u/43099313?v=4"
   }
 ###DELETE
-DELETE http://localhost:3000/products/d6cc7d26-7f2b-438b-a13e-a52a3f037586
+DELETE http://localhost:3000/products/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk2NjA0NTgsImV4cCI6MTczOTY2NDA1OH0.xkznTDS2DQSwJH0-VNarW8Il1J_rGtfjsJVlqjpe49w
+
 
 
 ###UPDATE STATUS
@@ -38,7 +41,7 @@ Content-Type: application/json
 
 
 ###GET BY ID
-GET http://localhost:3000/products/283013cb-6213-4457-ba7e-502a09df233e
+GET http://localhost:3000/products/9269415b-0afb-4146-b067-85dce66fe980
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwNjg0Yi05NzdiLTQyMzItYTA4Yy0xMTNjMGU2YjZkZDIiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk0NzQyMTUsImV4cCI6MTczOTQ3NzgxNX0.lQQtWdrDp2_jNoWrVfNpoYeoSpqbOTm3CZfikhPriu8
 
 

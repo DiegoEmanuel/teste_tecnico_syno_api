@@ -63,6 +63,11 @@ export class ProductController {
         data.foto_produto = req.file.filename;
       }
 
+      const existingProduct = await this.productService.getProductById(id);
+      if (!existingProduct) {
+        return res.status(404).json({ error: "Produto não encontrado" });
+      }
+
       const product = await this.productService.updateProduct(id, data);
 
       if (product && product.foto_produto) {
@@ -92,20 +97,32 @@ export class ProductController {
   }
 
   async deleteProduct(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      await this.productService.deleteProduct(id);
-      return res.sendStatus(204);
-    } catch (error: any) {
-      console.error("Erro ao deletar produto:", error);
-      return res.status(400).json({ error: error.message || "Produto não encontrado" });
+    // try {
+
+    //   const existingProduct = await this.productService.getProductById(req.params.id);
+    //   if (!existingProduct) {
+    //     return res.status(404).json({ error: "Produto não encontrado" });
+    //   }
+
+    //   const { id } = req.params;
+    //   await this.productService.deleteProduct(id);
+    //   return res.sendStatus(204);
+    // } catch (error: any) {
+    //   console.error("Erro ao deletar produto:", error);
+    //   return res.status(400).json({ error: error.message || "Produto não encontrado" });
+    // }
+    const existingProduct = await this.productService.getProductById(req.params.id);
+    if (!existingProduct) {
+      return res.status(404).json({ error: "Produto não encontrado" });
     }
+    await this.productService.deleteProduct(req.params.id);
+    return res.json({ message: "Produto deletado com sucesso" });
   }
 
   async deleteAllProducts(req: Request, res: Response) {
     try {
       await this.productService.deleteAllProducts();
-      return res.sendStatus(204);
+      return res.json({ message: "Todos os produtos foram deletados com sucesso" });
     } catch (error: any) {
       console.error("Erro ao deletar todos os produtos:", error);
       return res.status(400).json({ error: error.message || "Erro ao deletar todos os produtos" });
