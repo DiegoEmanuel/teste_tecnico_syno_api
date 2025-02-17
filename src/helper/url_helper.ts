@@ -1,6 +1,10 @@
-// helpers/url.helper.ts
-import { Request } from "express";
+import { Request } from 'express';
 
 export function buildImageUrl(req: Request, filename: string): string {
-    return `${req.protocol}://${req.get("host")}/uploads/products/${filename}`;
+    const baseUrl =
+        process.env.NODE_ENV === "production"
+            ? "https://teste-tecnico-syno-api.onrender.com"
+            : `${req.protocol}://${req.get("host")}`;
+
+    return `${baseUrl}/uploads/products/${filename}`;
 }

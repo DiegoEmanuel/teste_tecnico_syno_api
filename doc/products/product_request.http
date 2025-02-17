@@ -5,10 +5,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MGIwN
 ###POST
 POST http://localhost:3000/products
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk2Mjg2NDEsImV4cCI6MTczOTYzMjI0MX0.57GozFrbNjWWWzbLHKvJ8uOavX74RIyM39BA6nFSBYs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk3NTE4NzAsImV4cCI6MTczOTc1NTQ3MH0.RAZ1Hesk4xUGc3W8fEzkI2oM5FhSDiRUs5u0T9ZboYo
 
 {
     "codigo_produto": "09",
+    "descricao_produto": "Produto de teste",
+    "status": true
+}
+#### render
+POST https://teste-tecnico-syno-api.onrender.com/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk3NTE4NzAsImV4cCI6MTczOTc1NTQ3MH0.RAZ1Hesk4xUGc3W8fEzkI2oM5FhSDiRUs5u0T9ZboYo
+
+{
+    "codigo_produto": "099",
     "descricao_produto": "Produto de teste",
     "status": true
 }

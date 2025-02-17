@@ -1,5 +1,7 @@
 ###GET users
 GET http://localhost:3000/users
+###GET users render
+GET https://teste-tecnico-syno-api.onrender.com/users
 
 ###POST users
 POST http://localhost:3000/users
