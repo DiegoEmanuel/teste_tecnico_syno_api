@@ -13,9 +13,6 @@ model Produto {
   descricao_produto String
   status          Boolean @default(true)
   foto_produto    String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
-  Users Users[]
 
   @@map("products")
 }
@@ -25,7 +22,6 @@ model Users {
     name String
     email String @unique
     password String
-    produtos Produto[]
 
     @@map("users")
 }
