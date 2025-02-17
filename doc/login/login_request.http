@@ -1,5 +1,5 @@
 ###login
-POST http://localhost:3000/users/login
+POST https://teste-tecnico-syno-api.onrender.com/users
 Content-Type: application/json
 
 {

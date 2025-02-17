@@ -1,7 +1,13 @@
 ###GET users
-GET http://localhost:3000/users
+DELETE http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOWRiYjg4Zi0zYWZjLTRkMjItYjEwMi05NGU4OGI3ZTMwYTgiLCJlbWFpbCI6ImRpZWdvYWJveEBnbWFpbC5jb20iLCJpYXQiOjE3Mzk3NTE4NzAsImV4cCI6MTczOTc1NTQ3MH0.RAZ1Hesk4xUGc3W8fEzkI2oM5FhSDiRUs5u0T9ZboYo
+
+
 ###GET users render
-GET https://teste-tecnico-syno-api.onrender.com/users
+GET https://teste-tecnico-syno-api.onrender.com/
+Content-Type: application/json
+
 
 ###POST users
 POST http://localhost:3000/users
