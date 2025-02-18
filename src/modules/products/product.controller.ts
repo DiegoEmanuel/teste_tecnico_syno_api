@@ -3,6 +3,7 @@ import { ProductService } from "./product.service";
 import { CreateProductDTO } from "./product.dto";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
+import { ProductEntity } from '../../entities/product.entity';
 
 interface MulterRequest extends Request {
     file?: Express.Multer.File & { url?: string };
@@ -25,7 +26,7 @@ export class ProductController {
         productDto.foto_produto = req.file.url;
       }
 
-      const product = await this.productService.createProduct(productDto);
+      const product = await this.productService.createProduct(new ProductEntity(productDto));
       return res.status(201).json(product);
     } catch (error: any) {
       console.error("Erro ao criar produto:", error);

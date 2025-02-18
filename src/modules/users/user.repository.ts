@@ -1,5 +1,5 @@
 import prisma from "../../database";
-import { UserEntity } from "../../entities/user_entities";
+import { UserEntity } from "../../entities/user.entity";
 
 export class UserRepository {
   async createUser(name: string, email: string, password: string) {

@@ -1,22 +1,22 @@
 import { CreateProductDTO } from "./product.dto";
 import { ProductRepository } from "./product.repository";
 import { deleteImageFromFirebase } from '../../services/firebase';
+import { ProductEntity } from '../../entities/product.entity';
 
 export class ProductService {
   constructor(private productRepository: ProductRepository = new ProductRepository()) { }
 
   async createProduct(productDto: CreateProductDTO) {
-
     const codeAlredyExists = await this.productRepository.getProductByCodigo(productDto.codigo_produto);
     if (codeAlredyExists) {
       throw new Error("PRODUCT_DUPLICATE");
     }
 
-
+    const product = new ProductEntity(productDto);
     return this.productRepository.createProduct(
-      productDto.codigo_produto,
-      productDto.descricao_produto,
-      productDto.foto_produto || null
+      product.codigo_produto,
+      product.descricao_produto,
+      product.foto_produto
     );
   }
 
@@ -25,19 +25,14 @@ export class ProductService {
   }
 
   async updateProduct(id: string, data: Partial<CreateProductDTO>) {
-    try {
-      const currentProduct = await this.productRepository.getProductById(id);
-      
-      // Se está atualizando a imagem, deleta a antiga
-      if (currentProduct?.foto_produto && data.foto_produto && data.foto_produto !== currentProduct.foto_produto) {
-        await deleteImageFromFirebase(currentProduct.foto_produto);
-      }
+    const currentProduct = await this.productRepository.getProductById(id);
+    const updatedProduct = new ProductEntity({ ...currentProduct, ...data });
 
-      return this.productRepository.updateProduct(id, data);
-    } catch (error) {
-      console.error('Erro ao atualizar produto:', error);
-      throw error;
+    if (currentProduct?.foto_produto && data.foto_produto && data.foto_produto !== currentProduct.foto_produto) {
+      await deleteImageFromFirebase(currentProduct.foto_produto);
     }
+
+    return this.productRepository.updateProduct(id, updatedProduct);
   }
 
   async deleteProduct(id: string) {

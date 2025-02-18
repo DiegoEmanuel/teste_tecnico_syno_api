@@ -1,5 +1,5 @@
 import { UserRepository } from "./user.repository";
-import { UserEntity } from "../../entities/user_entities";
+import { UserEntity } from "../../entities/user.entity";
 
 export class UserService {
   private userRepository = new UserRepository();
