@@ -15,16 +15,12 @@ export class ProductController {
         return res.status(400).json({ errors });
       }
 
-      // Validação: se um texto foi enviado em vez de um arquivo
-      if (!req.file && typeof req.body.foto_produto === "string") {
-        return res.status(400).json({ error: "O campo foto_produto deve ser um arquivo válido." });
+      // Se houver arquivo, usa a URL do Firebase
+      if (req.file?.url) {
+        productDto.foto_produto = req.file.url;
       }
 
-      // Salva a URL da imagem que foi enviada ao Firebase
-      productDto.foto_produto = req.file?.url;
-
       const product = await this.productService.createProduct(productDto);
-
       return res.status(201).json(product);
     } catch (error: any) {
       console.error("Erro ao criar produto:", error);
@@ -49,13 +45,8 @@ export class ProductController {
         }
       }
 
-      // Validação: se um texto foi enviado no lugar de um arquivo
-      if (!req.file && typeof data.foto_produto === "string") {
-        return res.status(400).json({ error: "O campo foto_produto deve ser um arquivo válido." });
-      }
-
-      if (req.file) {
-        // Salva a URL da imagem enviada ao Firebase
+      // Se houver arquivo, atualiza a URL da imagem
+      if (req.file?.url) {
         data.foto_produto = req.file.url;
       }
 
