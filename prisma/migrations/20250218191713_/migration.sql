@@ -9,9 +9,7 @@
 */
 -- AlterTable
 ALTER TABLE "products" DROP COLUMN "createdAt",
-DROP COLUMN "updatedAt",
-ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+DROP COLUMN "updatedAt";
 
 -- AlterTable
 ALTER TABLE "users" DROP COLUMN "createdAt",

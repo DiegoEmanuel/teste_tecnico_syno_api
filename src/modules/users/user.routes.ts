@@ -7,9 +7,9 @@ const userController = new UserController();
 const authController = new AuthController();
 
 router.post("/", userController.createUser.bind(userController));
-router.get("/", userController.getAllUsers.bind(userController));
-router.put("/:id", userController.updateUser.bind(userController));
-router.delete("/:id", userController.deleteUser.bind(userController));
+router.get("/", authController.verifyToken.bind(authController), userController.getAllUsers.bind(userController));
+router.put("/:id",  authController.verifyToken.bind(authController),userController.updateUser.bind(userController));
+router.delete("/:id", authController.verifyToken.bind(authController),userController.deleteUser.bind(userController));
 router.delete("/", authController.verifyToken.bind(authController), userController.deleteAllUsers.bind(userController));
 
 router.post("/login", authController.login.bind(authController));
