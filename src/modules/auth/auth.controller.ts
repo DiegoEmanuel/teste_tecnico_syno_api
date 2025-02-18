@@ -8,8 +8,8 @@ import { validate } from 'class-validator';
 import { LoginDto } from './dtos/login.dto';
 config();
 
-const secret = process.env.JWT_SECRET || 'diegofalcao'; //ideial não ser hardcoded
-
+const secret = process.env.JWT_SECRET || 'diegofalcao';
+const JWT_EXPIRATION = '1h';
 
 export interface AuthenticatedRequest extends Request {
     user?: any;
@@ -55,7 +55,7 @@ export class AuthController {
                 },
                 secret,
                 //token expirando em 1h
-                { expiresIn: "1h" }
+                { expiresIn: JWT_EXPIRATION }
             );
 
             return res.json({
