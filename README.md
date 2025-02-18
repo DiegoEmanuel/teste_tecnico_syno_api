@@ -193,7 +193,7 @@ npx prisma generate
   ```
   Render:
   ```
-  [http://34.205.99.179:3000](https://teste-tecnico-syno-api.onrender.com)
+  [Render](https://teste-tecnico-syno-api.onrender.com/)
   ```
 
 **FIM**
