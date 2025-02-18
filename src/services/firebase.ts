@@ -1,12 +1,15 @@
+import admin from "firebase-admin";
+require('dotenv').config();
 
-import serviceAccount from "../config/firebase-key.json";
-
-const admin = require('firebase-admin');
-const BUCKET_NAME = 'syno-2bc76.firebasestorage.app';
+const serviceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+};
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: BUCKET_NAME
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET
 });
 
 const uploadImage = async (req, res, next) => {
@@ -32,7 +35,7 @@ const uploadImage = async (req, res, next) => {
 
   blobStream.on('finish', async () => {
     try {      
-      const url = `https://firebasestorage.googleapis.com/v0/b/${BUCKET_NAME}/o/${encodeURIComponent(nomeArquivo)}?alt=media`;
+      const url = `https://firebasestorage.googleapis.com/v0/b/${process.env.FIREBASE_STORAGE_BUCKET}/o/${encodeURIComponent(nomeArquivo)}?alt=media`;
       
       req.file.url = url;
       next();
