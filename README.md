@@ -93,6 +93,11 @@ Crie um arquivo `.env` na raiz do projeto com as chaves necessárias:
 DATABASE_URL=postgresql://usuario:senha@host:5432/nome_do_banco
 PORT=3000
 # Se houver JWT_SECRET ou outras variáveis, adicione-as aqui
+# firebase
+FIREBASE_PROJECT_ID=
+FIREBASE_PRIVATE_KEY=
+FIREBASE_CLIENT_EMAIL=
+FIREBASE_STORAGE_BUCKET=
 ```
 
 - **DATABASE_URL**: String de conexão com o banco PostgreSQL, no formato:
