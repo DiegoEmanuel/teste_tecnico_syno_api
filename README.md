@@ -91,8 +91,6 @@ Crie um arquivo `.env` na raiz do projeto com as chaves necessárias:
 
 ```
 DATABASE_URL=postgresql://usuario:senha@host:5432/nome_do_banco
-PORT=3000
-# Se houver JWT_SECRET ou outras variáveis, adicione-as aqui
 # firebase
 FIREBASE_PROJECT_ID=
 FIREBASE_PRIVATE_KEY=
@@ -185,7 +183,6 @@ npx prisma generate
 
 ## Outras Observações
 
-- Caso deseje alterar o comportamento de cache, configure manualmente no `server.ts`.
 - As rotas de imagens estão liberadas pelo firebase
   ```
   GET https://firebasestorage.googleapis.com/v0/b/syno-2bc76.firebasestorage.app/o/20250218T011455197Z_66486a2a5e3bf31fb267b07a7793e7d9.jpg?alt=media
@@ -193,6 +190,10 @@ npx prisma generate
   Aws:
   ```
   http://34.205.99.179:3000
+  ```
+  Render:
+  ```
+  [http://34.205.99.179:3000](https://teste-tecnico-syno-api.onrender.com)
   ```
 
 **FIM**
