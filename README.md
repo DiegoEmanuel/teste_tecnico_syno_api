@@ -26,7 +26,7 @@ Este projeto utiliza **Node.js**, **Express**, **Prisma** e **PostgreSQL** para 
 - **PostgreSQL** instalado e rodando
 - Criação de um banco de dados para o projeto
 - Ajustar as variáveis de ambiente, especialmente `DATABASE_URL`
-
+- Ajustar variáveis do firebase `FIREBASE_PROJECT_ID`, `FIREBASE_PRIVATE_KEY`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_STORAGE_BUCKET`
 ---
 
 ## Instalação
