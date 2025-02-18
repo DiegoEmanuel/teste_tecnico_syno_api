@@ -181,10 +181,9 @@ npx prisma generate
 ## Outras Observações
 
 - Caso deseje alterar o comportamento de cache, configure manualmente no `server.ts`.
-- Se publicar no [Render.com](https://dashboard.render.com/) ou outro serviço, atualize a variável `NODE_ENV=production` e defina corretamente o `DATABASE_URL`.
-- As rotas de imagens estão liberadas via CORS:
+- As rotas de imagens estão liberadas pelo firebase
   ```
-  GET https://seu-servidor.com/uploads/products/<nome_da_imagem>
+  GET https://firebasestorage.googleapis.com/v0/b/syno-2bc76.firebasestorage.app/o/20250218T011455197Z_66486a2a5e3bf31fb267b07a7793e7d9.jpg?alt=media
   ```
   Aws:
   ```
