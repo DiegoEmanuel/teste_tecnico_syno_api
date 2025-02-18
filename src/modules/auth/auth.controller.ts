@@ -68,7 +68,6 @@ export class AuthController {
                 }
             });
         } catch (error) {
-            console.error("Erro ao fazer login:", error);
             return res.status(500).json({ message: "Erro ao fazer login" + error });
         }
     }

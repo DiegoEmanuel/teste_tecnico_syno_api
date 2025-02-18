@@ -29,7 +29,6 @@ export class ProductController {
       const product = await this.productService.createProduct(new ProductEntity(productDto));
       return res.status(201).json(product);
     } catch (error: any) {
-      console.error("Erro ao criar produto:", error);
       return res.status(400).json({ error: error.message || "Erro ao criar produto" });
     }
   }
@@ -64,7 +63,6 @@ export class ProductController {
       const product = await this.productService.updateProduct(id, data);
       return res.json(product);
     } catch (error: any) {
-      console.error("Erro ao atualizar produto:", error);
       return res.status(400).json({ error: error.message || "Erro ao atualizar produto" });
     }
   }
@@ -75,7 +73,6 @@ export class ProductController {
       // Como já temos a URL completa vinda do Firebase, não é necessário modificá-la
       return res.json(products);
     } catch (error: any) {
-      console.error("Erro ao obter produtos:", error);
       return res.status(400).json({ error: error.message || "Erro ao obter produtos" });
     }
   }
@@ -94,7 +91,6 @@ export class ProductController {
         await this.productService.deleteProduct(id);
         return res.json({ message: "Produto e imagem deletados com sucesso" });
     } catch (error: any) {
-        console.error("Erro ao deletar produto:", error);
         return res.status(400).json({ error: error.message });
     }
   }
@@ -104,7 +100,6 @@ export class ProductController {
       await this.productService.deleteAllProducts();
       return res.json({ message: "Todos os produtos foram deletados com sucesso" });
     } catch (error: any) {
-      console.error("Erro ao deletar todos os produtos:", error);
       return res.status(400).json({ error: error.message || "Erro ao deletar todos os produtos" });
     }
   }
@@ -115,7 +110,6 @@ export class ProductController {
       const product = await this.productService.getProductById(id);
       return res.json(product);
     } catch (error: any) {
-      console.error("Erro ao obter produto por ID:", error);
       return res.status(400).json({ error: error.message || "Erro ao obter produto" });
     }
   }
@@ -137,7 +131,6 @@ export class ProductController {
         await this.productService.deleteProductImage(id);
         return res.json({ message: "Imagem deletada com sucesso" });
     } catch (error: any) {
-        console.error("Erro ao deletar imagem:", error);
         return res.status(400).json({ error: error.message });
     }
   }

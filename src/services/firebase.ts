@@ -77,7 +77,6 @@ export const deleteImageFromFirebase = async (imageUrl: string) => {
       console.log(`Arquivo ${decodedFileName} deletado com sucesso`);
     }
   } catch (error) {
-    console.error('Erro ao deletar imagem do Firebase:', error);
     throw new Error('Erro ao deletar imagem');
   }
 };

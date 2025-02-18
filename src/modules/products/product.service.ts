@@ -48,7 +48,6 @@ export class ProductService {
       // Deleta o produto do banco
       await this.productRepository.deleteProduct(id);
     } catch (error) {
-      console.error('Erro ao deletar produto:', error);
       throw error;
     }
   }
@@ -76,7 +75,6 @@ export class ProductService {
       // Deleta todos os produtos do banco
       await this.productRepository.deleteAllProducts();
     } catch (error) {
-      console.error('Erro ao deletar todos os produtos:', error);
       throw error;
     }
   }
@@ -93,7 +91,6 @@ export class ProductService {
             await this.productRepository.updateProduct(id, { foto_produto: null });
         }
     } catch (error) {
-        console.error('Erro ao deletar imagem do produto:', error);
         throw error;
     }
   }
