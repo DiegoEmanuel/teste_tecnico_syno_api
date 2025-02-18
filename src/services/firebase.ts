@@ -59,4 +59,27 @@ const uploadImage = async (req: MulterRequest, res: Response, next: NextFunction
   }
 }
 
+export const deleteImageFromFirebase = async (imageUrl: string) => {
+  try {
+    if (!imageUrl) return;
+
+    // Extrai o nome do arquivo da URL do Firebase
+    const fileName = imageUrl.split('/o/')[1].split('?')[0];
+    const decodedFileName = decodeURIComponent(fileName);
+
+    const bucket = admin.storage().bucket();
+    const file = bucket.file(decodedFileName);
+
+    // Verifica se o arquivo existe
+    const [exists] = await file.exists();
+    if (exists) {
+      await file.delete();
+      console.log(`Arquivo ${decodedFileName} deletado com sucesso`);
+    }
+  } catch (error) {
+    console.error('Erro ao deletar imagem do Firebase:', error);
+    throw new Error('Erro ao deletar imagem');
+  }
+};
+
 export default uploadImage;

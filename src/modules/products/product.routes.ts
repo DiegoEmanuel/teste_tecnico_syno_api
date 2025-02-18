@@ -30,6 +30,12 @@ router.get("/:id", productController.getProductById.bind(productController));
 
 router.delete("/", authController.verifyToken.bind(authController), productController.deleteAllProducts.bind(productController));
 
+router.delete(
+    "/:id/image",
+    authController.verifyToken.bind(authController),
+    productController.deleteProductImage.bind(productController)
+);
+
 export default router;
 
 
