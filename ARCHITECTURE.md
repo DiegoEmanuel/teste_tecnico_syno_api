@@ -101,7 +101,6 @@ class CreateProductDTO {
 - **Funcionalidades:**
   - Cadastro de usuários
   - Autenticação
-  - Gerenciamento de perfis
 
 ### 3. Módulo de Autenticação
 - **Funcionalidades:**
