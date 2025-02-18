@@ -1,5 +1,5 @@
 import prisma from "../../database";
-import { UserModel } from "../../models/user_model";
+import { UserEntity } from "../../entities/user_entities";
 
 export class UserRepository {
   async createUser(name: string, email: string, password: string) {
@@ -14,7 +14,7 @@ export class UserRepository {
     return prisma.users.findMany();
   }
 
-  async updateUser(id: string, data: UserModel) {
+  async updateUser(id: string, data: UserEntity) {
     return prisma.users.update({ where: { id }, data });
   }
 

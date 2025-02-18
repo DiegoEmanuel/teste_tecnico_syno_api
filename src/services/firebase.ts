@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 import admin from "firebase-admin";
 require('dotenv').config();
 
@@ -12,24 +13,30 @@ admin.initializeApp({
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET
 });
 
-const uploadImage = async (req, res, next) => {
+// Estende o tipo Request do Express para incluir o file do Multer
+interface MulterRequest extends Request {
+    file?: Express.Multer.File & { url?: string };
+}
+
+const uploadImage = async (req: MulterRequest, res: Response, next: NextFunction) => {
   // Se não houver arquivo, continua o fluxo
   if (!req.file) {
     return next();
   }
 
   try {
-    const dataAtual = new Date().toISOString().replace(/[:.-]/g, '');
+    //basicamente ele substitui todos os caracteres especiais por nada, deixando apenas os numeros e letras
+    const dataAtual = new Date().toISOString().replace(/[:.-]/g, ''); 
     const nomeArquivo = `${dataAtual}_${req.file.originalname}`;
     const tipoArquivo = req.file.mimetype;
 
-    const bucket = admin.storage().bucket();
-    const blob = bucket.file(nomeArquivo);
+    const bucket = admin.storage().bucket(); //pega o bucket do firebase
+    const blob = bucket.file(nomeArquivo); //pega o arquivo do firebase
     const blobStream = blob.createWriteStream({
       metadata: {
         contentType: tipoArquivo
       }
-    });
+    }); //cria o stream do arquivo
 
     blobStream.on('error', (error) => {
       next(error);
@@ -37,6 +44,7 @@ const uploadImage = async (req, res, next) => {
 
     blobStream.on('finish', async () => {
       try {      
+        //esse try pega os erros de permissão
         const url = `https://firebasestorage.googleapis.com/v0/b/${process.env.FIREBASE_STORAGE_BUCKET}/o/${encodeURIComponent(nomeArquivo)}?alt=media`;
         req.file.url = url;
         next();

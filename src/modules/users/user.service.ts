@@ -1,5 +1,5 @@
 import { UserRepository } from "./user.repository";
-import { UserModel } from "../../models/user_model";
+import { UserEntity } from "../../entities/user_entities";
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -15,7 +15,7 @@ export class UserService {
     return this.userRepository.getAllUsers();
   }
 
-  async updateUser(id: string, data: UserModel) {
+  async updateUser(id: string, data: UserEntity) {
     return this.userRepository.updateUser(id, data);
   }
 

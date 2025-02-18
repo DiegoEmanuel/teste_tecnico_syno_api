@@ -15,11 +15,12 @@ export interface AuthenticatedRequest extends Request {
     user?: any;
 }
 
-const userService = new UserService();
-
 export class AuthController {
+    constructor(private userService: UserService = new UserService()) {}
+
     async login(req: Request, res: Response) {
         try {
+            // a plainToClass é uma função que transforma um objeto literal em um objeto da classe LoginDto
             const loginDto = plainToClass(LoginDto, req.body);
             const errors = await validate(loginDto);
 
@@ -35,7 +36,7 @@ export class AuthController {
             }
 
             const { email, password } = loginDto;
-            const user = await userService.findUserByEmail(email);
+            const user = await this.userService.findUserByEmail(email);
 
             if (!user) {
                 return res.status(401).json({ message: "Usuário não encontrado" });
@@ -72,29 +73,20 @@ export class AuthController {
         }
     }
 
-
     async verifyToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
             return res.status(401).json({ message: "Token não fornecido" });
         }
-
         const token = authHeader.replace('Bearer ', '');
         //de forma simples a função jwt.verify verifica se o token é valido e se é valido ele retorna o id e o email do usuario
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token inválido" });
             }
-
             req.user = decoded;
             next();
         });
-
     }
-
-
 }
-
-
-

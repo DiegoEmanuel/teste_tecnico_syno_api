@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProductController } from "./product.controller";
-import { AuthController } from "../auth/auth_controller";
+import { AuthController } from "../auth/auth.controller";
 import upload from "../../config/multerconfig";
 import uploadImage from "../../services/firebase";
 

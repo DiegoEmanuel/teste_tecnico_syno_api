@@ -4,10 +4,15 @@ import { CreateProductDTO } from "./product.dto";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 
+interface MulterRequest extends Request {
+    file?: Express.Multer.File & { url?: string };
+}
+
 export class ProductController {
   constructor(private productService: ProductService = new ProductService()) { }
 
-  async createProduct(req: Request, res: Response) {
+
+  async createProduct(req: MulterRequest, res: Response) {
     try {
       const productDto = plainToClass(CreateProductDTO, req.body);
       const errors = await validate(productDto);
@@ -28,7 +33,7 @@ export class ProductController {
     }
   }
 
-  async updateProduct(req: Request, res: Response) {
+  async updateProduct(req: MulterRequest, res: Response) {
     try {
       const { id } = req.params;
       const data = req.body;

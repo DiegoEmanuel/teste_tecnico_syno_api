@@ -6,8 +6,8 @@ export class ProductService {
 
   async createProduct(productDto: CreateProductDTO) {
 
-    const productExists = await this.productRepository.getProductByCodigo(productDto.codigo_produto);
-    if (productExists) {
+    const codeAlredyExists = await this.productRepository.getProductByCodigo(productDto.codigo_produto);
+    if (codeAlredyExists) {
       throw new Error("PRODUCT_DUPLICATE");
     }
 
