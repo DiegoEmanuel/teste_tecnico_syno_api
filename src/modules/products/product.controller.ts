@@ -3,8 +3,6 @@ import { ProductService } from "./product.service";
 import { CreateProductDTO } from "./product.dto";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
-import { buildImageUrl } from "../../helper/url_helper";
-
 
 export class ProductController {
   constructor(private productService: ProductService = new ProductService()) { }
@@ -22,13 +20,10 @@ export class ProductController {
         return res.status(400).json({ error: "O campo foto_produto deve ser um arquivo válido." });
       }
 
-      productDto.foto_produto = req.file?.filename;
+      // Salva a URL da imagem que foi enviada ao Firebase
+      productDto.foto_produto = req.file?.url;
 
       const product = await this.productService.createProduct(productDto);
-
-      if (product.foto_produto) {
-        product.foto_produto = buildImageUrl(req, product.foto_produto);
-      }
 
       return res.status(201).json(product);
     } catch (error: any) {
@@ -60,7 +55,8 @@ export class ProductController {
       }
 
       if (req.file) {
-        data.foto_produto = req.file.filename;
+        // Salva a URL da imagem enviada ao Firebase
+        data.foto_produto = req.file.url;
       }
 
       const existingProduct = await this.productService.getProductById(id);
@@ -69,10 +65,6 @@ export class ProductController {
       }
 
       const product = await this.productService.updateProduct(id, data);
-
-      if (product && product.foto_produto) {
-        product.foto_produto = buildImageUrl(req, product.foto_produto);
-      }
       return res.json(product);
     } catch (error: any) {
       console.error("Erro ao atualizar produto:", error);
@@ -83,13 +75,8 @@ export class ProductController {
   async getAllProducts(req: Request, res: Response) {
     try {
       const products = await this.productService.getAllProducts();
-      const productsWithImages = products.map(product => {
-        if (product.foto_produto) {
-          product.foto_produto = buildImageUrl(req, product.foto_produto);
-        }
-        return product;
-      });
-      return res.json(productsWithImages);
+      // Como já temos a URL completa vinda do Firebase, não é necessário modificá-la
+      return res.json(products);
     } catch (error: any) {
       console.error("Erro ao obter produtos:", error);
       return res.status(400).json({ error: error.message || "Erro ao obter produtos" });
@@ -97,20 +84,6 @@ export class ProductController {
   }
 
   async deleteProduct(req: Request, res: Response) {
-    // try {
-
-    //   const existingProduct = await this.productService.getProductById(req.params.id);
-    //   if (!existingProduct) {
-    //     return res.status(404).json({ error: "Produto não encontrado" });
-    //   }
-
-    //   const { id } = req.params;
-    //   await this.productService.deleteProduct(id);
-    //   return res.sendStatus(204);
-    // } catch (error: any) {
-    //   console.error("Erro ao deletar produto:", error);
-    //   return res.status(400).json({ error: error.message || "Produto não encontrado" });
-    // }
     const existingProduct = await this.productService.getProductById(req.params.id);
     if (!existingProduct) {
       return res.status(404).json({ error: "Produto não encontrado" });
@@ -133,9 +106,6 @@ export class ProductController {
     try {
       const { id } = req.params;
       const product = await this.productService.getProductById(id);
-      if (product && product.foto_produto) {
-        product.foto_produto = buildImageUrl(req, product.foto_produto);
-      }
       return res.json(product);
     } catch (error: any) {
       console.error("Erro ao obter produto por ID:", error);

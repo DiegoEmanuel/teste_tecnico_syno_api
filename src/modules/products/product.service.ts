@@ -5,13 +5,13 @@ export class ProductService {
   constructor(private productRepository: ProductRepository = new ProductRepository()) { }
 
   async createProduct(productDto: CreateProductDTO) {
-    // Verifica se já existe um produto com o mesmo código
+
     const productExists = await this.productRepository.getProductByCodigo(productDto.codigo_produto);
     if (productExists) {
       throw new Error("PRODUCT_DUPLICATE");
     }
 
-    // Cria o produto usando os dados do DTO
+
     return this.productRepository.createProduct(
       productDto.codigo_produto,
       productDto.descricao_produto,
