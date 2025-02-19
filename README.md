@@ -1,4 +1,4 @@
-﻿# Projeto - API com Upload de Imagens e Autenticação
+# Projeto - API com Upload de Imagens e Autenticação
  - [Frontend SYNO](https://github.com/DiegoEmanuel/teste_tecnico_syno/).
 
 Este projeto utiliza **Node.js**, **Express**, **Prisma** e **PostgreSQL** para gerenciar usuários, produtos e upload de imagens.
@@ -33,7 +33,7 @@ Este projeto utiliza **Node.js**, **Express**, **Prisma** e **PostgreSQL** para 
 
 1. **Clonar o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/diegoemanuel/teste_tecnico_syno_api
    ```
 2. **Instalar dependências**:
    ```bash
@@ -77,9 +77,6 @@ Este projeto utiliza **Node.js**, **Express**, **Prisma** e **PostgreSQL** para 
 │   └── server.ts             // Configuração principal do servidor
 │   └── routes
 │   │   ├── index.ts
-│   └── server.ts             // Configuração principal do servidor
-├── uploads
-│   └── products              // Pasta onde as imagens são salvas
 └── ...
 ```
 
