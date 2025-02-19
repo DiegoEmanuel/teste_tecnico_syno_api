@@ -84,7 +84,7 @@ export class UserController {
       if (!userExists) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
-      const user = await userService.deleteUser(id);
+      await userService.deleteUser(id);
       res.status(200);
     } catch (error) {
       console.log(error);
@@ -94,8 +94,8 @@ export class UserController {
 
   async deleteAllUsers(req: Request, res: Response) {
     try {
-      const users = await userService.deleteAllUsers();
-      res.json(users);
+      await userService.deleteAllUsers();
+      res.status(200).json({ message: "Todos os usuários foram deletados com sucesso" });
     } catch (error) {
       console.log(error);
       res.status(400).json({ message: "Erro ao deletar todos os usuários", error: error.message });

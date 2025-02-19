@@ -6,7 +6,9 @@ export class ProductEntity {
     foto_produto?: string;
 
     constructor(data: Partial<ProductEntity>) {
-        Object.assign(this, data);
-        this.status = data.status ?? true;
+        Object.assign(this, {
+            ...data,
+            status: typeof data.status === 'string' ? data.status === 'true' : data.status ?? true
+        });
     }
 } 

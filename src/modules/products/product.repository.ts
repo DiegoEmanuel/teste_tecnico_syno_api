@@ -1,4 +1,5 @@
 import prisma from "../../database";
+import { ProductEntity } from "../../entities/product.entity";
 
 export class ProductRepository {
   async createProduct(codigo_produto: string, descricao_produto: string, foto_produto?: string) {
@@ -16,8 +17,11 @@ export class ProductRepository {
     });
   }
 
-  async updateProduct(id: string, data: any) {
-    return prisma.produto.update({ where: { id }, data });
+  async updateProduct(id: string, data: Partial<ProductEntity>) {
+    return prisma.produto.update({ 
+        where: { id }, 
+        data 
+    });
   }
 
   async deleteProduct(id: string) {
