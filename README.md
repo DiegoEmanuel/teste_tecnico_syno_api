@@ -1,5 +1,5 @@
 # Projeto - API com Upload de Imagens e Autenticação
- - Ambiente online: [[Syno app](https://testetecnicosyno.vercel.app/)](https://teste-tecnico-syno-api.onrender.com)
+ - Ambiente online: [Syno api online](https://teste-tecnico-syno-api.onrender.com)
  - [Repositório Frontend SYNO](https://github.com/DiegoEmanuel/teste_tecnico_syno/).
 
 
