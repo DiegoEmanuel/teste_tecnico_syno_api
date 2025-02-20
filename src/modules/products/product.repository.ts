@@ -17,7 +17,7 @@ export class ProductRepository {
     });
   }
 
-  async updateProduct(id: string, data: Partial<ProductEntity>) {
+  async updateProduct(id: string, data: ProductEntity) {
     return prisma.produto.update({ 
         where: { id }, 
         data 
