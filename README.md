@@ -1,5 +1,7 @@
 # Projeto - API com Upload de Imagens e Autenticação
- - [Frontend SYNO](https://github.com/DiegoEmanuel/teste_tecnico_syno/).
+ - Ambiente online: [[Syno app](https://testetecnicosyno.vercel.app/)](https://teste-tecnico-syno-api.onrender.com)
+ - [Repositório Frontend SYNO](https://github.com/DiegoEmanuel/teste_tecnico_syno/).
+
 
 Este projeto utiliza **Node.js**, **Express**, **Prisma** e **PostgreSQL** para gerenciar usuários, produtos e upload de imagens.
 
