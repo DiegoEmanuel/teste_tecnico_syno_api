@@ -28,9 +28,11 @@ export class ProductService {
     const currentProduct = await this.productRepository.getProductById(id);
     const updatedProduct = new ProductEntity({ ...currentProduct, ...data });
 
-    const codeAlredyExists = await this.productRepository.getProductByCodigo(data.codigo_produto);
-    if (codeAlredyExists) {
-      throw new Error("Produto com o mesmo código já existe");
+    if (data.codigo_produto) {
+      const productWithSameCode = await this.productRepository.getProductByCodigo(data.codigo_produto);
+      if (productWithSameCode && productWithSameCode.id !== id) {
+        throw new Error("Produto com o mesmo código já existe");
+      }
     }
 
     if (currentProduct?.foto_produto && data.foto_produto && data.foto_produto !== currentProduct.foto_produto) {
