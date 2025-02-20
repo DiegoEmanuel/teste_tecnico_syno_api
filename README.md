@@ -161,7 +161,7 @@ FIREBASE_STORAGE_BUCKET=
 ## Uploads de Imagens
 
 - Utiliza-se o **Multer** configurado em `src/config/multerconfig.ts`
-- As imagens são salvas na pasta `uploads/products`
+- As imagens são salvas no firebase e o multer faz uma stream pra enviar o arquivo
 - Para enviar uma imagem, defina **form-data** no Postman, com o campo `foto_produto` do tipo **File**.
 
 ---
