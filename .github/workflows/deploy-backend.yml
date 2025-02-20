@@ -20,7 +20,12 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Executar Testes
+      - name: Run Tests
+        env:
+          FIREBASE_PROJECT_ID: "mock-project-id"
+          FIREBASE_PRIVATE_KEY: "mock-key"
+          FIREBASE_CLIENT_EMAIL: "mock@email.com"
+          FIREBASE_STORAGE_BUCKET: "mock-bucket"
         run: npm test
 
       - name: Build do projeto

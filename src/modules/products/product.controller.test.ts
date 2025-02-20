@@ -3,22 +3,26 @@ import { ProductService } from './product.service';
 import { Request, Response } from 'express';
 import { ProductEntity } from '../../entities/product.entity';
 
- 
+jest.mock('../../services/firebase', () => ({
+  deleteImageFromFirebase: jest.fn(),
+  __esModule: true,
+  default: jest.fn()
+}));
+
 jest.mock('./product.service');
 
 describe('ProductController', () => {
     let productController: ProductController;
-    let mockProductService: jest.Mocked<ProductService>;
+    let productService: jest.Mocked<ProductService>;
     let mockRequest: Partial<Request>;
     let mockResponse: Partial<Response>;
 
     beforeEach(() => {
         jest.clearAllMocks();
         
-         
-        mockProductService = new ProductService() as jest.Mocked<ProductService>;
+        productService = new ProductService() as jest.Mocked<ProductService>;
         
-        productController = new ProductController(mockProductService);
+        productController = new ProductController(productService);
         mockResponse = {
             json: jest.fn(),
             status: jest.fn().mockReturnThis(),
@@ -55,7 +59,7 @@ describe('ProductController', () => {
                 }
             };
 
-            mockProductService.createProduct.mockResolvedValue(mockProduct as any);
+            productService.createProduct.mockResolvedValue(mockProduct as any);
 
             await productController.createProduct(
                 mockRequest as any,
@@ -74,7 +78,7 @@ describe('ProductController', () => {
                 }
             };
 
-            mockProductService.createProduct.mockRejectedValue(new Error('PRODUCT_DUPLICATE'));
+            productService.createProduct.mockRejectedValue(new Error('PRODUCT_DUPLICATE'));
 
             await productController.createProduct(
                 mockRequest as any,
@@ -104,7 +108,7 @@ describe('ProductController', () => {
                 })
             ];
 
-            mockProductService.getAllProducts.mockResolvedValue(mockProducts as any);
+            productService.getAllProducts.mockResolvedValue(mockProducts as any);
 
             await productController.getAllProducts(
                 {} as Request,
@@ -130,8 +134,8 @@ describe('ProductController', () => {
                 body: { descricao_produto: 'Produto Atualizado' }
             };
 
-            mockProductService.getProductById.mockResolvedValue(mockProduct as any);
-            mockProductService.updateProduct.mockResolvedValue(mockProduct as any);
+            productService.getProductById.mockResolvedValue(mockProduct as any);
+            productService.updateProduct.mockResolvedValue(mockProduct as any);
 
             await productController.updateProduct(
                 mockRequest as any,
@@ -156,7 +160,7 @@ describe('ProductController', () => {
                 params: { id: '1' }
             };
 
-            mockProductService.getProductById.mockResolvedValue(mockProduct as any);
+            productService.getProductById.mockResolvedValue(mockProduct as any);
 
             await productController.deleteProduct(
                 mockRequest as Request,
