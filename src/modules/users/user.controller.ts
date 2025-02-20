@@ -41,7 +41,6 @@ export class UserController {
       };
       res.status(201).json(userWithNoPass);
     } catch (error) {
-      console.log(error);
       res.status(400).json({ message: "Erro ao criar usuário" });
     }
   }
@@ -58,7 +57,6 @@ export class UserController {
 
       res.json(usersWithoutPassword);
     } catch (error) {
-      console.log(error);
       res.status(400).json({ message: "Erro ao buscar todos os usuários" });
     }
   }
@@ -70,7 +68,6 @@ export class UserController {
       const user = await userService.updateUser(id, { name, email, password });
       res.status(200).json(user);
     } catch (error) {
-      console.log(error);
       res.status(400).json({ message: "Erro ao atualizar usuário" });
     }
   }
@@ -87,7 +84,6 @@ export class UserController {
       await userService.deleteUser(id);
       res.status(200);
     } catch (error) {
-      console.log(error);
       res.status(400).json({ message: "Erro ao deletar usuário", error: error.message });
     }
   }
@@ -97,7 +93,6 @@ export class UserController {
       await userService.deleteAllUsers();
       res.status(200).json({ message: "Todos os usuários foram deletados com sucesso" });
     } catch (error) {
-      console.log(error);
       res.status(400).json({ message: "Erro ao deletar todos os usuários", error: error.message });
     }
   }

@@ -71,7 +71,6 @@ export const deleteImageFromFirebase = async (imageUrl: string) => {
     const [exists] = await file.exists();
     if (exists) {
       await file.delete();
-      console.log(`Arquivo ${decodedFileName} deletado com sucesso`);
     }
   } catch (error) {
     throw new Error('Erro ao deletar imagem');
