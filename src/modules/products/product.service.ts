@@ -1,4 +1,4 @@
-import { ProductDTO } from "./product.dto";
+import { ProductDTO } from "./dtos/product.dto";
 import { ProductRepository } from "./product.repository";
 import { deleteImageFromFirebase } from '../../services/firebase';
 import { ProductEntity } from '../../entities/product.entity';
@@ -26,7 +26,16 @@ export class ProductService {
 
   async updateProduct(id: string, data: Partial<ProductDTO>) {
     const currentProduct = await this.productRepository.getProductById(id);
-    const updatedProduct = new ProductEntity({ ...currentProduct, ...data });
+    
+    if (!data.foto_produto) {
+      delete data.foto_produto;
+    }
+    
+    const updatedProduct = new ProductEntity({ 
+      ...currentProduct, 
+      ...data, 
+      status: data.status === 'true' ? true : false 
+    });
 
     if (data.codigo_produto) {
       const productWithSameCode = await this.productRepository.getProductByCodigo(data.codigo_produto);

@@ -16,7 +16,7 @@ export class ProductController {
         foto_produto: req.file?.url || null
       };
 
-      const product = await this.productService.createProduct(new ProductEntity(productData));
+      const product = await this.productService.createProduct(productData);
       return res.status(201).json(product);
     } catch (error: any) {
       return res.status(400).json({ error: error.message || "Erro ao criar produto" });

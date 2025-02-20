@@ -2,8 +2,9 @@ import { Router } from "express";
 import { ProductController } from "./product.controller";
 
 import { validateBody } from "../../middlewares/validationMiddleware";
-import { ProductCreateDTO, ProductDTO } from "./product.dto";
+import { ProductCreateDTO, ProductDTO } from "./dtos/product.dto";
 import upload from "../../config/multerconfig";
+import uploadImage from "../../services/firebase";
 import { AuthController } from "../auth/auth.controller";
 const router = Router();
 const productController = new ProductController();
@@ -12,6 +13,7 @@ const authController = new AuthController();
 router.post(
   "/",
   upload.single("foto_produto"),
+  uploadImage,
   validateBody(ProductCreateDTO),
   authController.verifyToken.bind(authController),
   productController.createProduct.bind(productController)
@@ -22,6 +24,7 @@ router.get("/", productController.getAllProducts.bind(productController), );
 router.put(
   "/:id",
   upload.single("foto_produto"),
+  uploadImage,
   validateBody(ProductDTO),
   authController.verifyToken.bind(authController),
   productController.updateProduct.bind(productController)

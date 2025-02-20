@@ -13,8 +13,9 @@ export class ProductDTO {
   @IsString()
   foto_produto?: string;
 
-  @IsBoolean()
-  status?: boolean;
+  @IsNotEmpty({ message: "O status do produto é obrigatório" })
+  @IsString()
+  status?: string;
 }
 
 export class ProductCreateDTO {
