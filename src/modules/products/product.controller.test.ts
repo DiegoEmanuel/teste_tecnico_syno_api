@@ -3,10 +3,10 @@ import { ProductService } from './product.service';
 import { Request, Response } from 'express';
 import { ProductEntity } from '../../entities/product.entity';
 
-jest.mock('../../services/firebase', () => ({
-  deleteImageFromFirebase: jest.fn(),
+jest.mock('../../services/handleLocalServerImage', () => ({
+  deleteImage: jest.fn(),
   __esModule: true,
-  default: jest.fn()
+  uploadImageToServer: jest.fn()
 }));
 
 jest.mock('./product.service');

@@ -1,6 +1,6 @@
 import { ProductDTO } from "./dtos/product.dto";
 import { ProductRepository } from "./product.repository";
-import { deleteImageFromFirebase } from '../../services/firebase';
+import { deleteImage } from '../../services/handleLocalServerImage';
 import { ProductEntity } from '../../entities/product.entity';
 
 export class ProductService {
@@ -45,7 +45,7 @@ export class ProductService {
     }
 
     if (currentProduct?.foto_produto && data.foto_produto && data.foto_produto !== currentProduct.foto_produto) {
-      await deleteImageFromFirebase(currentProduct.foto_produto);
+      await deleteImage(currentProduct.foto_produto);
     }
 
     return this.productRepository.updateProduct(id, updatedProduct);
@@ -58,7 +58,7 @@ export class ProductService {
       
       if (product?.foto_produto) {
          
-        await deleteImageFromFirebase(product.foto_produto);
+        await deleteImage(product.foto_produto);
       }
 
        
@@ -85,7 +85,7 @@ export class ProductService {
       await Promise.all(
         products
           .filter(product => product.foto_produto)
-          .map(product => deleteImageFromFirebase(product.foto_produto))
+          .map(product => deleteImage(product.foto_produto))
       );
 
        
@@ -100,7 +100,7 @@ export class ProductService {
         const product = await this.productRepository.getProductById(id);
         
         if (product?.foto_produto) {
-            await deleteImageFromFirebase(product.foto_produto);
+            await deleteImage(product.foto_produto);
             
             const updatedProduct = new ProductEntity({ ...product, foto_produto: null });
             await this.productRepository.updateProduct(id, updatedProduct);
