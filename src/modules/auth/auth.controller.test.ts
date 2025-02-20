@@ -20,14 +20,14 @@ describe('AuthController', () => {
     let mockNext: NextFunction;
 
     beforeEach(() => {
-        // Limpa todos os mocks antes de cada teste
+         
         jest.clearAllMocks();
         
         mockUserService = {
             findUserByEmail: jest.fn()
         } as any;
 
-        // Injeta o mockUserService no AuthController
+         
         authController = new AuthController(mockUserService);
         
         mockResponse = {

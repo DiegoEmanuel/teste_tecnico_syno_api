@@ -6,7 +6,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-// Configura todas as rotas
 setupRoutes(app);
 
 app.listen(PORT, () => {

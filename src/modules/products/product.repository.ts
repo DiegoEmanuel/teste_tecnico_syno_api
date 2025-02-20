@@ -3,7 +3,7 @@ import { ProductEntity } from "../../entities/product.entity";
 
 export class ProductRepository {
   async createProduct(codigo_produto: string, descricao_produto: string, foto_produto?: string) {
-    //criando com status sempre true 
+     
     return prisma.produto.create({
       data: { codigo_produto, descricao_produto, status: true, foto_produto }
     });

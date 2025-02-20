@@ -3,7 +3,7 @@ import { ProductService } from './product.service';
 import { Request, Response } from 'express';
 import { ProductEntity } from '../../entities/product.entity';
 
-// Mock do ProductService
+ 
 jest.mock('./product.service');
 
 describe('ProductController', () => {
@@ -15,7 +15,7 @@ describe('ProductController', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         
-        // Configurar o mock do ProductService
+         
         mockProductService = new ProductService() as jest.Mocked<ProductService>;
         
         productController = new ProductController(mockProductService);

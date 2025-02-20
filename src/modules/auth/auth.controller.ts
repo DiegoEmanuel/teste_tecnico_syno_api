@@ -20,7 +20,7 @@ export class AuthController {
 
     async login(req: Request, res: Response) {
         try {
-            // a plainToClass é uma função que transforma um objeto literal em um objeto da classe LoginDto
+             
             const loginDto = plainToClass(LoginDto, req.body);
             const errors = await validate(loginDto);
 
@@ -54,7 +54,7 @@ export class AuthController {
                     email: user.email
                 },
                 secret,
-                //token expirando em 1h
+                 
                 { expiresIn: JWT_EXPIRATION }
             );
 
@@ -79,7 +79,7 @@ export class AuthController {
             return res.status(401).json({ message: "Token não fornecido" });
         }
         const token = authHeader.replace('Bearer ', '');
-        //de forma simples a função jwt.verify verifica se o token é valido e se é valido ele retorna o id e o email do usuario
+         
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
                 return res.status(401).json({ message: "Token inválido" });

@@ -34,7 +34,7 @@ export class UserController {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await userService.createUser(name, email, hashedPassword);
-      //retorna o usuário criado sem a senha
+       
       const userWithNoPass = {
         ...user,
         password: undefined
@@ -50,7 +50,7 @@ export class UserController {
     try {
       const users = await userService.getAllUsers();
 
-      //usando desestruturação para não retornar a senha
+       
       const usersWithoutPassword = users.map((user) => {
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;

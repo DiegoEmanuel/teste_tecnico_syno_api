@@ -42,15 +42,15 @@ export class ProductService {
 
   async deleteProduct(id: string) {
     try {
-      // Busca o produto para obter a URL da imagem
+       
       const product = await this.productRepository.getProductById(id);
       
       if (product?.foto_produto) {
-        // Deleta a imagem do Firebase
+         
         await deleteImageFromFirebase(product.foto_produto);
       }
 
-      // Deleta o produto do banco
+       
       await this.productRepository.deleteProduct(id);
     } catch (error) {
       throw error;
@@ -67,17 +67,17 @@ export class ProductService {
 
   async deleteAllProducts() {
     try {
-      // Busca todos os produtos para deletar suas imagens
+       
       const products = await this.productRepository.getAllProducts();
       
-      // Deleta todas as imagens do Firebase
+       
       await Promise.all(
         products
           .filter(product => product.foto_produto)
           .map(product => deleteImageFromFirebase(product.foto_produto))
       );
 
-      // Deleta todos os produtos do banco
+       
       await this.productRepository.deleteAllProducts();
     } catch (error) {
       throw error;
