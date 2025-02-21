@@ -45,7 +45,11 @@ export class ProductService {
     }
 
     if (currentProduct?.foto_produto && data.foto_produto && data.foto_produto !== currentProduct.foto_produto) {
-      await deleteImageFromFirebase(currentProduct.foto_produto);
+      try {
+        await deleteImageFromFirebase(currentProduct.foto_produto);
+      } catch (error) {
+        console.error("Erro ao deletar imagem, mas continuando com a atualização do produto", error);
+      }
     }
 
     return this.productRepository.updateProduct(id, updatedProduct);
@@ -58,7 +62,11 @@ export class ProductService {
       
       if (product?.foto_produto) {
          
+       try {
         await deleteImageFromFirebase(product.foto_produto);
+       } catch (error) {
+        console.error("Erro ao deletar imagem, mas continuando com a exclusão do produto", error);
+       }
       }
 
        
@@ -85,7 +93,13 @@ export class ProductService {
       await Promise.all(
         products
           .filter(product => product.foto_produto)
-          .map(product => deleteImageFromFirebase(product.foto_produto))
+          .map(async product => {
+            try {
+              await deleteImageFromFirebase(product.foto_produto);
+            } catch (error) {
+              console.error("Erro ao deletar imagem, mas continuando com a exclusão de todos os produtos", error);
+            }
+          })
       );
 
        

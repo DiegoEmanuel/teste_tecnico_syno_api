@@ -6,7 +6,7 @@ import { ProductEntity } from '../../entities/product.entity';
 jest.mock('../../services/firebase', () => ({
   deleteImageFromFirebase: jest.fn(),
   __esModule: true,
-  default: jest.fn()
+  uploadImageToFirebase: jest.fn()
 }));
 
 jest.mock('./product.service');
