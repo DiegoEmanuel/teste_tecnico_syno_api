@@ -66,7 +66,7 @@ export class UserController {
       const { id } = req.params;
       const { name, email, password } = req.body;
       const user = await userService.updateUser(id, { name, email, password });
-      res.status(200).json(user);
+      res.status(200).json({ message: "Usuário atualizado com sucesso" });
     } catch (error) {
       res.status(400).json({ message: "Erro ao atualizar usuário" });
     }
@@ -82,7 +82,7 @@ export class UserController {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
       await userService.deleteUser(id);
-      res.status(200);
+      res.status(200).json({ message: "Usuário deletado com sucesso" });
     } catch (error) {
       res.status(400).json({ message: "Erro ao deletar usuário", error: error.message });
     }
